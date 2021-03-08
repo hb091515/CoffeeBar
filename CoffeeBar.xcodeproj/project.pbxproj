@@ -19,9 +19,11 @@
 		48909DB325F2088E00424B5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48909DB125F2088E00424B5B /* LaunchScreen.storyboard */; };
 		48909DBC25F219B900424B5B /* CoffeeBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */; };
 		48909DCB25F2291700424B5B /* CoffeeBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48909DCA25F2291700424B5B /* CoffeeBarTableViewCell.swift */; };
+		D5763A2C2A49D07B1B34BAAD /* Pods_CoffeeBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FE87F0E0EAC0768CC2BFB2E /* Pods-CoffeeBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.release.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.release.xcconfig"; sourceTree = "<group>"; };
 		4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailViewController.swift; sourceTree = "<group>"; };
 		4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailHeaderView.swift; sourceTree = "<group>"; };
 		4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarInfoCell.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		48909DB425F2088E00424B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarTableViewController.swift; sourceTree = "<group>"; };
 		48909DCA25F2291700424B5B /* CoffeeBarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarTableViewCell.swift; sourceTree = "<group>"; };
+		DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeeBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBF5C591443B7DD37B0A24F4 /* Pods-CoffeeBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.debug.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5763A2C2A49D07B1B34BAAD /* Pods_CoffeeBar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +86,8 @@
 			children = (
 				48909DA225F2088A00424B5B /* CoffeeBar */,
 				48909DA125F2088A00424B5B /* Products */,
+				6C7B6212072C5B85F6E4FB4C /* Pods */,
+				CEFD7592CB1D8A2FF5E389D5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +116,24 @@
 			path = CoffeeBar;
 			sourceTree = "<group>";
 		};
+		6C7B6212072C5B85F6E4FB4C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DBF5C591443B7DD37B0A24F4 /* Pods-CoffeeBar.debug.xcconfig */,
+				3FE87F0E0EAC0768CC2BFB2E /* Pods-CoffeeBar.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CEFD7592CB1D8A2FF5E389D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -116,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48909DB725F2088E00424B5B /* Build configuration list for PBXNativeTarget "CoffeeBar" */;
 			buildPhases = (
+				C641B15C05CB32ED5C8DFBC6 /* [CP] Check Pods Manifest.lock */,
 				48909D9C25F2088A00424B5B /* Sources */,
 				48909D9D25F2088A00424B5B /* Frameworks */,
 				48909D9E25F2088A00424B5B /* Resources */,
+				5A275FEDB65372D6F8D9B71D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +200,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A275FEDB65372D6F8D9B71D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C641B15C05CB32ED5C8DFBC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoffeeBar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		48909D9C25F2088A00424B5B /* Sources */ = {
@@ -331,6 +400,7 @@
 		};
 		48909DB825F2088E00424B5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBF5C591443B7DD37B0A24F4 /* Pods-CoffeeBar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -350,6 +420,7 @@
 		};
 		48909DB925F2088E00424B5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE87F0E0EAC0768CC2BFB2E /* Pods-CoffeeBar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -23,6 +23,8 @@ class CoffeeBarDetailViewController: UIViewController, UITableViewDelegate, UITa
         tableView.delegate = self
         tableView.dataSource = self
         
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.title = coffeeBarInfo?.name!
         
         if let infoCoffeeData = coffeeBarInfo{
             if let lati = infoCoffeeData.latitude, let long = infoCoffeeData.longitude{

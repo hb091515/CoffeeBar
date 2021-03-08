@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 struct CoffeeBar:Decodable{
     var name:String?
@@ -24,8 +25,14 @@ struct CoffeeBar:Decodable{
 }
 
 
-class CoffeeBarTableViewController: UITableViewController {
+class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdating {
+    
+    
+    
     var coffeeBars:[CoffeeBar] = []
+    
+    var searchController: UISearchController!
+    var searchResults:[CoffeeBar] = []
     
     let apiAddress = "https://cafenomad.tw/api/v1.2/cafes"
     var urlSession = URLSession(configuration: .default)
@@ -34,6 +41,7 @@ class CoffeeBarTableViewController: UITableViewController {
         super.viewDidLoad()
         
         downloadInfo(webAddress: apiAddress)
+        searchBarSetting()
     }
 
     // MARK: - Table view data source
@@ -43,17 +51,23 @@ class CoffeeBarTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coffeeBars.count
+        if searchController.isActive{
+            return searchResults.count
+        }else{
+            return coffeeBars.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarCell", for: indexPath) as? CoffeeBarTableViewCell{
-            cell.coffeeBarName.text = coffeeBars[indexPath.row].name
-            cell.coffeeBarCity.text = coffeeBars[indexPath.row].city
-            cell.coffeeBarAddress.text = coffeeBars[indexPath.row].address
+            
+            let coffeebar = (searchController.isActive) ? searchResults[indexPath.row] : coffeeBars[indexPath.row]
+            
+            cell.coffeeBarName.text = coffeebar.name!
+            cell.coffeeBarCity.text = coffeebar.city!
+            cell.coffeeBarAddress.text = coffeebar.address!
             
         
-
             return cell
         }else{
             let cell = UITableViewCell()
@@ -62,14 +76,21 @@ class CoffeeBarTableViewController: UITableViewController {
             return cell
         }
 }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
     }
     
+    //使用者選取搜尋列,呼叫此方法
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text{
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
+    }
     
-
-    // MARK: - API Service
+    // MARK: - API Service methods
     func downloadInfo(webAddress:String){
         if let url = URL(string: webAddress){
             let task = urlSession.dataTask(with: url, completionHandler: {
@@ -123,6 +144,31 @@ class CoffeeBarTableViewController: UITableViewController {
         let alertController = UIAlertController(title: title, message: "請稍候再試", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Search methods
+    func filterContent(for searchText: String) {
+        searchResults = coffeeBars.filter({ (CoffeeBar) -> Bool in
+            if let name = CoffeeBar.name, let city = CoffeeBar.city, let address = CoffeeBar.address{
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || city.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText)
+                
+                return isMatch
+            }
+            return false
+        })
+    }
+    
+    func searchBarSetting(){
+        searchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = searchController.searchBar
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        searchController.searchBar.placeholder = "Search Coffeebar..."
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.tintColor = UIColor.red
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +226,7 @@ class CoffeeBarTableViewController: UITableViewController {
                 //目前選到哪個列,點到哪個section哪個row
                 let selectedIndexPath = self.tableView.indexPathForSelectedRow
                 if let selectedRow = selectedIndexPath?.row {
-                    dest.coffeeBarInfo = coffeeBars[selectedRow]
+                    dest.coffeeBarInfo = (searchController.isActive) ? searchResults[selectedRow] : coffeeBars[selectedRow]
                 }
                 
             }
