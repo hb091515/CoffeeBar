@@ -9,20 +9,19 @@ import UIKit
 
 class CoffeeBarTableViewCell: UITableViewCell {
 
+    var coffeeBarViewController: CoffeeBarTableViewController?
+    
     @IBOutlet weak var coffeeBarName: UILabel!
     @IBOutlet weak var coffeeBarCity: UILabel!
     @IBOutlet weak var coffeeBarAddress: UILabel!{
-        didSet{
+        didSet {
             coffeeBarAddress.numberOfLines = 0
         }
     }
-    @IBAction func likeButton(_ sender: UIButton) {
-    }
-    
-    @IBOutlet weak var likeStyle: UIButton!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var likeImage: UIImageView!{
+        didSet {
+            
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

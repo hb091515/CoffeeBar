@@ -13,7 +13,6 @@ class CoffeeBarDetailViewController: UIViewController, UITableViewDelegate, UITa
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var hearderView: CoffeeBarDetailHeaderView!
-
     
     var coffeeBarInfo: CoffeeBar?
     
@@ -25,6 +24,7 @@ class CoffeeBarDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.title = coffeeBarInfo?.name!
+        
         
         if let infoCoffeeData = coffeeBarInfo{
             if let lati = infoCoffeeData.latitude, let long = infoCoffeeData.longitude{
@@ -53,38 +53,63 @@ class CoffeeBarDetailViewController: UIViewController, UITableViewDelegate, UITa
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
-            cell.iconImage.image = UIImage(systemName: "location")
+            cell.iconImage.image = UIImage(named: "location")
             cell.showTextLabel.text = coffeeBarInfo?.address!
             
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
-            cell.iconImage.image = UIImage(systemName: "wifi")
-            cell.showTextLabel.text = "WIFI穩定 \(coffeeBarInfo!.wifi!)"
+            cell.iconImage.image = UIImage(named: "wifi")
+            if String(coffeeBarInfo!.wifi!) == "0.0"{
+                cell.showTextLabel.text = "尚無資訊"
+                cell.showTextLabel.textColor = .red
+            }else{
+                cell.showTextLabel.text = "WIFI穩定 \(coffeeBarInfo!.wifi!)"
+            }
             
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
             cell.iconImage.image = UIImage(named: "seat")
-            cell.showTextLabel.text = "通常有位 \(coffeeBarInfo!.seat!)"
+            if String(coffeeBarInfo!.seat!) == "0.0"{
+                cell.showTextLabel.text = "尚無資訊"
+                cell.showTextLabel.textColor = .red
+            }else{
+                cell.showTextLabel.text = "通常有位 \(coffeeBarInfo!.seat!)"
+            }
             
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
             cell.iconImage.image = UIImage(named: "tasty")
-            cell.showTextLabel.text = "咖啡好喝 \(coffeeBarInfo!.tasty!)"
+            if String(coffeeBarInfo!.tasty!) == "0.0"{
+                cell.showTextLabel.text = "尚無資訊"
+                cell.showTextLabel.textColor = .red
+            }else{
+                cell.showTextLabel.text = "咖啡好喝 \(coffeeBarInfo!.tasty!)"
+            }
             
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
             cell.iconImage.image = UIImage(named: "cost")
-            cell.showTextLabel.text = "價格便宜 \(coffeeBarInfo!.cheap!)"
+            if String(coffeeBarInfo!.cheap!) == "0.0"{
+                cell.showTextLabel.text = "尚無資訊"
+                cell.showTextLabel.textColor = .red
+            }else{
+                cell.showTextLabel.text = "價格便宜 \(coffeeBarInfo!.cheap!)"
+            }
             
             return cell
         case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarInfoCell", for: indexPath) as! CoffeeBarInfoCell
-            cell.iconImage.image = UIImage(systemName: "music.note")
-            cell.showTextLabel.text = "裝潢音樂 \(coffeeBarInfo!.music!)"
+            cell.iconImage.image = UIImage(named: "music")
+            if String(coffeeBarInfo!.music!) == "0.0"{
+                cell.showTextLabel.text = "尚無資訊"
+                cell.showTextLabel.textColor = .red
+            }else{
+                cell.showTextLabel.text = "裝潢音樂 \(coffeeBarInfo!.music!)"
+            }
             
             return cell
         case 7:

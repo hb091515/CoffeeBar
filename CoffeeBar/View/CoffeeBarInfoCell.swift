@@ -8,7 +8,6 @@
 import UIKit
 
 class CoffeeBarInfoCell: UITableViewCell {
-    
 
     @IBOutlet weak var iconImage: UIImageView!{
         didSet{

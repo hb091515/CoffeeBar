@@ -8,5 +8,5 @@ target 'CoffeeBar' do
   # Pods for CoffeeBar
 
     pod 'DropDown'
-
+    pod 'FBSDKLoginKit'
 end
