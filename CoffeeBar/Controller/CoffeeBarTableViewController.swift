@@ -6,23 +6,8 @@
 //
 
 import UIKit
-import DropDown
-
-struct CoffeeBar:Decodable{
-    var name:String?
-    var city:String?
-    var address:String?
-    var wifi:Double?
-    var seat:Double?
-    var quiet:Double?
-    var cheap:Double?
-    var tasty:Double?
-    var music:Double?
-    var latitude:String?
-    var longitude:String?
-    var url:String?
-    var like:Bool?
-}
+import Alamofire
+import SwiftyJSON
 
 
 class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdating {
@@ -35,11 +20,17 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
     let apiAddress = "https://cafenomad.tw/api/v1.2/cafes"
     var urlSession = URLSession(configuration: .default)
     
+    var likeVC: MyFavoriteViewController?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        downloadInfo(webAddress: apiAddress)
+      //  downloadInfo(webAddress: apiAddress)
         searchBarSetting()
+        getDataFromAlamofire(webAddress: apiAddress)
+        
+        
 
     }
 
@@ -50,21 +41,26 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive{
+        
+        if searchController.isActive {
             return searchResults.count
-        }else{
+        }else {
             return coffeeBars.count
         }
+       
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CoffeeBarCell", for: indexPath) as? CoffeeBarTableViewCell{
+            
             
             let coffeebar = (searchController.isActive) ? searchResults[indexPath.row] : coffeeBars[indexPath.row]
             
-            cell.coffeeBarName.text = coffeebar.name!
-            cell.coffeeBarCity.text = coffeebar.city!
-    
+            cell.coffeeBarName.text = coffeebar.name
+            cell.coffeeBarCity.text = coffeebar.city
+
             if cell.coffeeBarCity.text == "taipei" {
                 cell.coffeeBarCity.text = "台北市"
                 } else if cell.coffeeBarCity.text == "chiayi" {
@@ -101,18 +97,20 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
                     cell.coffeeBarCity.text = "雲林縣"
                 } else if cell.coffeeBarCity.text == "keelung" {
                     cell.coffeeBarCity.text = "基隆市"}
-            cell.coffeeBarAddress.text = coffeebar.address!
             
-            cell.likeImage.isHidden = (coffeebar.like!) ? false : true
-            
+            cell.coffeeBarAddress.text = coffeebar.address
+            cell.likeImage.isHidden = (coffeebar.like) ? false : true
+           
             return cell
         }else{
             let cell = UITableViewCell()
-            cell.textLabel?.text = ""
             
             return cell
         }
+        
 }
+    
+  
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -120,20 +118,41 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
 
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if searchController.isActive {
+            return false
+        }else{
+            return true
+        }
+    }
+    
+    //判斷使用者以滾動到最後一筆資料
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        print(offsetY,contentHeight)
+    }
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let likeAction = UIContextualAction(style: .normal, title: "Like", handler: {
+        
+        let likeAction = UIContextualAction(style: .normal, title: (coffeeBars[indexPath.row].like) ? "UnLike" : "Like", handler: {
             (action, sourceView, completionHandler) in
             
             let cell = tableView.cellForRow(at: indexPath) as! CoffeeBarTableViewCell
-            self.coffeeBars[indexPath.row].like! = (self.coffeeBars[indexPath.row].like!) ? false : true
-            cell.likeImage.isHidden = self.coffeeBars[indexPath.row].like! ? false : true
-
+            self.coffeeBars[indexPath.row].like = (self.coffeeBars[indexPath.row].like) ? false : true
+            cell.likeImage.isHidden = self.coffeeBars[indexPath.row].like ? false : true
+            
+            
             completionHandler(true)
         })
         
-        let checkInIcon = coffeeBars[indexPath.row].like! ? "heart.slash" : "heart.fill"
+        let checkInIcon = coffeeBars[indexPath.row].like ? "heart.slash" : "heart.fill"
         likeAction.backgroundColor = UIColor(red: 255/255, green: 171/255, blue: 133/256, alpha: 1)
         likeAction.image = UIImage(systemName: checkInIcon)
+        
+        if self.coffeeBars[indexPath.row].like == true{
+            self.likeVC?.likeCoffeeBar.append(self.coffeeBars[indexPath.row])
+        }
 
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [likeAction])
@@ -152,54 +171,31 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
     }
     
     // MARK: - API Service methods
-    func downloadInfo(webAddress:String){
-        if let url = URL(string: webAddress){
-            let task = urlSession.dataTask(with: url, completionHandler: {
-                (data, response, error) in
-                if error != nil{
-                    let errorCode = (error! as NSError).code
-                    if errorCode == -1009{         //無網路
-                        DispatchQueue.main.async {
-                            self.popAlert(withTitle: "未連接網路服務")
-                        }
-                    }else{
-                        DispatchQueue.main.async {
-                            self.popAlert(withTitle: "出現不明錯誤")
-                        }
-                    }
-                    return
+    func getDataFromAlamofire(webAddress:String){
+        //判斷 string 能否轉換成 url
+        guard let url = URL(string: webAddress) else { return }
+        
+        // 使用 Alamofire 獲取 url 上的資料
+        AF.request(url, method: .get).validate().responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                for (_, subJson) in json {
+                    let data = CoffeeBar(name: subJson["name"].stringValue, city: subJson["city"].stringValue, address: subJson["address"].stringValue, wifi: subJson["wifi"].doubleValue, seat: subJson["seat"].doubleValue, quiet: subJson["quiet"].doubleValue, cheap: subJson["cheap"].doubleValue, tasty: subJson["tasty"].doubleValue, music: subJson["music"].doubleValue, latitude: subJson["latitude"].stringValue, longitude: subJson["longitude"].stringValue, url: subJson["url"].stringValue, like: false)
+                    self.coffeeBars.append(data)
                 }
-                
-                if let loadedData = data{
-                    do{
-                        let okData = try JSONDecoder().decode([CoffeeBar].self, from: loadedData)
-                        for i in 0..<okData.count{
-                            let name = okData[i].name!
-                            let city = okData[i].city!
-                            let address = okData[i].address!
-                            let wifi = okData[i].wifi
-                            let seat = okData[i].seat!
-                            let music = okData[i].music!
-                            let tasty = okData[i].tasty!
-                            let cheap = okData[i].cheap!
-                            let quiet = okData[i].quiet!
-                            let longitude = okData[i].longitude!
-                            let latitude = okData[i].latitude!
-                            let url = okData[i].url!
-                            let user = CoffeeBar(name: name, city: city, address: address, wifi: wifi, seat: seat, quiet: quiet, cheap: cheap, tasty: tasty, music: music, latitude: latitude, longitude: longitude, url: url, like: false)
-                            self.coffeeBars.append(user)
-                        }
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }catch{
-                        print(error.localizedDescription)
-                    }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
-            })
-            task.resume()
-        }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+
     }
+        
+}
+    
+    
     
     func popAlert(withTitle title:String){
         let alertController = UIAlertController(title: title, message: "請稍候再試", preferredStyle: .alert)
@@ -210,13 +206,17 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
     // MARK: - Search methods
     func filterContent(for searchText: String) {
         searchResults = coffeeBars.filter({ (CoffeeBar) -> Bool in
-            if let name = CoffeeBar.name, let city = CoffeeBar.city, let address = CoffeeBar.address{
-                let isMatch = name.localizedCaseInsensitiveContains(searchText) || city.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText)
+            
+            let name = CoffeeBar.name
+            let city = CoffeeBar.city
+            let address = CoffeeBar.address
+            let isMatch = name.localizedCaseInsensitiveContains(searchText) || city.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText)
                 
-                return isMatch
-            }
-            return false
-        })
+            return isMatch
+            
+            
+        }
+        )
     }
     
     func searchBarSetting(){
@@ -236,51 +236,8 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCoffeeBarDetail"{
@@ -295,6 +252,7 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
                 
             }
         }
+        
     }
 
 }

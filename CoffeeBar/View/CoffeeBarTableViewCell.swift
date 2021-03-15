@@ -8,9 +8,8 @@
 import UIKit
 
 class CoffeeBarTableViewCell: UITableViewCell {
-
-    var coffeeBarViewController: CoffeeBarTableViewController?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var coffeeBarName: UILabel!
     @IBOutlet weak var coffeeBarCity: UILabel!
     @IBOutlet weak var coffeeBarAddress: UILabel!{

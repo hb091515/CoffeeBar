@@ -13,8 +13,8 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var emailAddress: UILabel!
     
     @IBAction func logout(_ sender: UIButton) {
-        let manager = LoginManager()
-        manager.logOut()
+        popAlert(title: "確定要登出嗎?")
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,22 @@ class ProfileTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 2
+    }
+    
+    func popAlert(title: String){
+        let alertController = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default, handler: {
+            (action) in
+            let manager = LoginManager()
+            manager.logOut()
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+        let cancelAction = UIAlertAction(title: "否", style: .cancel, handler: nil)
+
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 
     /*

@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48386D1D25F909040070736B /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D1C25F909040070736B /* FavoriteTableViewController.swift */; };
 		48386D2025F912BD0070736B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D1F25F912BD0070736B /* ProfileViewController.swift */; };
 		48386D2325F9284F0070736B /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D2225F9284F0070736B /* ProfileTableViewController.swift */; };
+		48386D3525F9C82C0070736B /* MyFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */; };
+		48386D3825F9F3E50070736B /* MyFavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */; };
 		4839156425F5C1DF00C67395 /* CoffeeBarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */; };
 		4839156825F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */; };
 		4839156B25F5EBB500C67395 /* CoffeeBarInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */; };
@@ -22,17 +23,21 @@
 		48909DB325F2088E00424B5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48909DB125F2088E00424B5B /* LaunchScreen.storyboard */; };
 		48909DBC25F219B900424B5B /* CoffeeBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */; };
 		48909DCB25F2291700424B5B /* CoffeeBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48909DCA25F2291700424B5B /* CoffeeBarTableViewCell.swift */; };
+		48A720A125FA7C8A00DC927B /* CoffeeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A720A025FA7C8A00DC927B /* CoffeeBar.swift */; };
 		48A9CB9025F76FF30025D1C3 /* crayon_1-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48A9CB8F25F76FF30025D1C3 /* crayon_1-1.ttf */; };
 		48A9CB9425F7BA010025D1C3 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9CB9325F7BA010025D1C3 /* DesignableView.swift */; };
+		48BD334225FB5A150074DECD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48BD334125FB5A150074DECD /* GoogleService-Info.plist */; };
+		48BD334725FB8DBA0074DECD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BD334625FB8DBA0074DECD /* CloudKit.framework */; };
 		48E9D58B25F7CA2A006FDA06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */; };
 		D5763A2C2A49D07B1B34BAAD /* Pods_CoffeeBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3FE87F0E0EAC0768CC2BFB2E /* Pods-CoffeeBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.release.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.release.xcconfig"; sourceTree = "<group>"; };
-		48386D1C25F909040070736B /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		48386D1F25F912BD0070736B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		48386D2225F9284F0070736B /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteViewController.swift; sourceTree = "<group>"; };
+		48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailViewController.swift; sourceTree = "<group>"; };
 		4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailHeaderView.swift; sourceTree = "<group>"; };
 		4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarInfoCell.swift; sourceTree = "<group>"; };
@@ -47,8 +52,12 @@
 		48909DB425F2088E00424B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarTableViewController.swift; sourceTree = "<group>"; };
 		48909DCA25F2291700424B5B /* CoffeeBarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarTableViewCell.swift; sourceTree = "<group>"; };
+		48A720A025FA7C8A00DC927B /* CoffeeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBar.swift; sourceTree = "<group>"; };
 		48A9CB8F25F76FF30025D1C3 /* crayon_1-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "crayon_1-1.ttf"; sourceTree = "<group>"; };
 		48A9CB9325F7BA010025D1C3 /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		48BD334125FB5A150074DECD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		48BD334425FB8DA70074DECD /* CoffeeBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeBar.entitlements; sourceTree = "<group>"; };
+		48BD334625FB8DBA0074DECD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeeBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF5C591443B7DD37B0A24F4 /* Pods-CoffeeBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.debug.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5763A2C2A49D07B1B34BAAD /* Pods_CoffeeBar.framework in Frameworks */,
+				48BD334725FB8DBA0074DECD /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,9 +83,9 @@
 				48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */,
 				4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */,
 				48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */,
-				48386D1C25F909040070736B /* FavoriteTableViewController.swift */,
 				48386D1F25F912BD0070736B /* ProfileViewController.swift */,
 				48386D2225F9284F0070736B /* ProfileTableViewController.swift */,
+				48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -83,6 +93,7 @@
 		4839156125F5C1AB00C67395 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				48A720A025FA7C8A00DC927B /* CoffeeBar.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +105,7 @@
 				4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */,
 				4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */,
 				48A9CB9325F7BA010025D1C3 /* DesignableView.swift */,
+				48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +131,7 @@
 		48909DA225F2088A00424B5B /* CoffeeBar */ = {
 			isa = PBXGroup;
 			children = (
+				48BD334425FB8DA70074DECD /* CoffeeBar.entitlements */,
 				48A9CB8E25F76FD80025D1C3 /* Font */,
 				4839156225F5C1B100C67395 /* View */,
 				4839156125F5C1AB00C67395 /* Model */,
@@ -129,6 +142,7 @@
 				48909DAF25F2088E00424B5B /* Assets.xcassets */,
 				48909DB125F2088E00424B5B /* LaunchScreen.storyboard */,
 				48909DB425F2088E00424B5B /* Info.plist */,
+				48BD334125FB5A150074DECD /* GoogleService-Info.plist */,
 				48909DAC25F2088A00424B5B /* CoffeeBar.xcdatamodeld */,
 			);
 			path = CoffeeBar;
@@ -154,6 +168,7 @@
 		CEFD7592CB1D8A2FF5E389D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48BD334625FB8DBA0074DECD /* CloudKit.framework */,
 				DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */,
 			);
 			name = Frameworks;
@@ -220,6 +235,7 @@
 			files = (
 				48A9CB9025F76FF30025D1C3 /* crayon_1-1.ttf in Resources */,
 				48909DB325F2088E00424B5B /* LaunchScreen.storyboard in Resources */,
+				48BD334225FB5A150074DECD /* GoogleService-Info.plist in Resources */,
 				48909DB025F2088E00424B5B /* Assets.xcassets in Resources */,
 				48909DAB25F2088A00424B5B /* Main.storyboard in Resources */,
 			);
@@ -274,17 +290,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48386D3825F9F3E50070736B /* MyFavoriteTableViewCell.swift in Sources */,
 				48386D2325F9284F0070736B /* ProfileTableViewController.swift in Sources */,
 				4839156B25F5EBB500C67395 /* CoffeeBarInfoCell.swift in Sources */,
 				48909DA825F2088A00424B5B /* ViewController.swift in Sources */,
 				48909DBC25F219B900424B5B /* CoffeeBarTableViewController.swift in Sources */,
 				4839156425F5C1DF00C67395 /* CoffeeBarDetailViewController.swift in Sources */,
 				48909DA425F2088A00424B5B /* AppDelegate.swift in Sources */,
-				48386D1D25F909040070736B /* FavoriteTableViewController.swift in Sources */,
+				48A720A125FA7C8A00DC927B /* CoffeeBar.swift in Sources */,
 				48909DCB25F2291700424B5B /* CoffeeBarTableViewCell.swift in Sources */,
 				48909DA625F2088A00424B5B /* SceneDelegate.swift in Sources */,
 				4839156825F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift in Sources */,
 				48A9CB9425F7BA010025D1C3 /* DesignableView.swift in Sources */,
+				48386D3525F9C82C0070736B /* MyFavoriteViewController.swift in Sources */,
 				48386D2025F912BD0070736B /* ProfileViewController.swift in Sources */,
 				48909DAE25F2088A00424B5B /* CoffeeBar.xcdatamodeld in Sources */,
 				48E9D58B25F7CA2A006FDA06 /* LoginViewController.swift in Sources */,
@@ -435,6 +453,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CoffeeBar/CoffeeBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X6S462S4Q;
 				INFOPLIST_FILE = CoffeeBar/Info.plist;
@@ -455,6 +474,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CoffeeBar/CoffeeBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X6S462S4Q;
 				INFOPLIST_FILE = CoffeeBar/Info.plist;

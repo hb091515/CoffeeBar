@@ -6,7 +6,15 @@ target 'CoffeeBar' do
   use_frameworks!
 
   # Pods for CoffeeBar
+    
+    pod 'Alamofire'
+    pod 'SwiftyJSON'
 
-    pod 'DropDown'
-    pod 'FBSDKLoginKit'
+  # Firebase SDK
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+
+  # Facebook SDK
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
 end
