@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 import FBSDKLoginKit
 import Firebase
+import Alamofire
+import SwiftyJSON
 
 
 @main
@@ -17,19 +19,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
+        let defaults = UserDefaults.standard
+        let isPreloaded = defaults.bool(forKey: "isPreloaded")
+        if !isPreloaded {
+            getDataFromAlamofire(webAddress: "https://cafenomad.tw/api/v1.2/cafes/")
+            defaults.set(true, forKey: "isPreloaded")
+        }
         
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        //Thread.sleep(forTimeInterval: 2.0)
         
+        //FirebaseApp.configure()
+        
+        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
     }
     
+    func getDataFromAlamofire(webAddress:String){
+        //判斷 string 能否轉換成 url
+        guard let url = URL(string: webAddress) else { return }
+        // 使用 Alamofire 獲取 url 上的資料
+        AF.request(url, method: .get).validate().responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print("多少\(json.count)")
+                for (_, subJson) in json {
+                    DispatchQueue.main.async {
+                        
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                        let cofedata = CoffeebarModel(context: appDelegate.persistentContainer.viewContext)
+                        cofedata.name = subJson["name"].stringValue
+                        cofedata.city = subJson["city"].stringValue
+                        cofedata.address = subJson["address"].stringValue
+                        cofedata.wifi = subJson["wifi"].doubleValue
+                        cofedata.seat = subJson["seat"].doubleValue
+                        cofedata.cheap = subJson["cheap"].doubleValue
+                        cofedata.tasty = subJson["tasty"].doubleValue
+                        cofedata.music = subJson["music"].doubleValue
+                        cofedata.latitude = subJson["latitude"].stringValue
+                        cofedata.longitude = subJson["longitude"].stringValue
+                        cofedata.url = subJson["url"].stringValue
+                        cofedata.like = false
+                        
+                        appDelegate.saveContext()
+                    }
+//                    let data = CoffeeBar(name: subJson["name"].stringValue, city: subJson["city"].stringValue, address: subJson["address"].stringValue, wifi: subJson["wifi"].doubleValue, seat: subJson["seat"].doubleValue, quiet: subJson["quiet"].doubleValue, cheap: subJson["cheap"].doubleValue, tasty: subJson["tasty"].doubleValue, music: subJson["music"].doubleValue, latitude: subJson["latitude"].stringValue, longitude: subJson["longitude"].stringValue, url: subJson["url"].stringValue, like: false)
+//                    self.coffeeBars.append(data)
+                }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+
+    }
+        
+    }
+    
     
     //fb
-    func application( _ app:UIApplication, open url:URL, options: [UIApplication.OpenURLOptionsKey :Any] = [:] ) -> Bool {
-        
-        ApplicationDelegate.shared.application( app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] ) }
+//    func application( _ app:UIApplication, open url:URL, options: [UIApplication.OpenURLOptionsKey :Any] = [:] ) -> Bool {
+//
+//        ApplicationDelegate.shared.application( app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] ) }
     
     // MARK: UISceneSession Lifecycle
 
@@ -91,4 +142,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
 

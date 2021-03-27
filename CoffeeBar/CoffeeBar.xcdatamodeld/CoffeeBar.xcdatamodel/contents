@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CoffeeBar" representedClassName="CoffeeBarMO" syncable="YES" codeGenerationType="class">
+    <entity name="Coffeebar" representedClassName="CoffeebarModel" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
-        <attribute name="cheap" optional="YES" attributeType="String"/>
+        <attribute name="cheap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="city" optional="YES" attributeType="String"/>
-        <attribute name="cost" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="String"/>
-        <attribute name="like" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="like" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String"/>
-        <attribute name="music" optional="YES" attributeType="String"/>
+        <attribute name="music" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="quiet" optional="YES" attributeType="String"/>
-        <attribute name="seat" optional="YES" attributeType="String"/>
-        <attribute name="tasty" optional="YES" attributeType="String"/>
+        <attribute name="seat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tasty" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="wifi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="Comment" representedClassName="CommentModel" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="CoffeeBar" positionX="-63" positionY="-18" width="128" height="253"/>
+        <element name="Coffeebar" positionX="-63" positionY="9" width="128" height="223"/>
+        <element name="Comment" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

@@ -8,30 +8,50 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreData
 
 
-class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdating {
+class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdating,NSFetchedResultsControllerDelegate {
     
-    var coffeeBars:[CoffeeBar] = []
+    var coffeeBars:[CoffeebarModel] = []
     
     var searchController: UISearchController!
-    var searchResults:[CoffeeBar] = []
+    var searchResults:[CoffeebarModel] = []
     
-    let apiAddress = "https://cafenomad.tw/api/v1.2/cafes"
+    let apiAddress = "https://cafenomad.tw/api/v1.2/cafes/"
     var urlSession = URLSession(configuration: .default)
     
-    var likeVC: MyFavoriteViewController?
+    var fetchResultController : NSFetchedResultsController<CoffeebarModel>!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  downloadInfo(webAddress: apiAddress)
+
+        
         searchBarSetting()
-        getDataFromAlamofire(webAddress: apiAddress)
+        //resetAllRecord(in: "Coffeebar")
+        //getDataFromAlamofire(webAddress: apiAddress)
+        fetchDataFromCoreData()
         
         
 
+    }
+    
+    //刪除全部紀錄
+    func resetAllRecord(in entity: String){
+        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        let delete = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let request = NSBatchDeleteRequest(fetchRequest: delete)
+        
+        do {
+            try context?.execute(request)
+            try context?.save()
+        } catch {
+            print("there was an error")
+        }
+        
     }
 
     // MARK: - Table view data source
@@ -100,7 +120,7 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
             
             cell.coffeeBarAddress.text = coffeebar.address
             cell.likeImage.isHidden = (coffeebar.like) ? false : true
-           
+            
             return cell
         }else{
             let cell = UITableViewCell()
@@ -133,15 +153,20 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
         print(offsetY,contentHeight)
     }
     
+    //滑動加入喜愛名單
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let likeAction = UIContextualAction(style: .normal, title: (coffeeBars[indexPath.row].like) ? "UnLike" : "Like", handler: {
             (action, sourceView, completionHandler) in
             
-            let cell = tableView.cellForRow(at: indexPath) as! CoffeeBarTableViewCell
-            self.coffeeBars[indexPath.row].like = (self.coffeeBars[indexPath.row].like) ? false : true
-            cell.likeImage.isHidden = self.coffeeBars[indexPath.row].like ? false : true
-            
+            //儲存喜好咖啡廳狀態
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                let cell = tableView.cellForRow(at: indexPath) as! CoffeeBarTableViewCell
+                self.coffeeBars[indexPath.row].like = (self.coffeeBars[indexPath.row].like) ? false : true
+                cell.likeImage.isHidden = self.coffeeBars[indexPath.row].like ? false : true
+                
+                appDelegate.saveContext()
+            }
             
             completionHandler(true)
         })
@@ -150,9 +175,8 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
         likeAction.backgroundColor = UIColor(red: 255/255, green: 171/255, blue: 133/256, alpha: 1)
         likeAction.image = UIImage(systemName: checkInIcon)
         
-        if self.coffeeBars[indexPath.row].like == true{
-            self.likeVC?.likeCoffeeBar.append(self.coffeeBars[indexPath.row])
-        }
+        
+        
 
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [likeAction])
@@ -169,20 +193,22 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
             tableView.reloadData()
         }
     }
-    
+
+
+/*
     // MARK: - API Service methods
     func getDataFromAlamofire(webAddress:String){
         //判斷 string 能否轉換成 url
         guard let url = URL(string: webAddress) else { return }
-        
         // 使用 Alamofire 獲取 url 上的資料
         AF.request(url, method: .get).validate().responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                print("多少\(json.count)")
                 for (_, subJson) in json {
-                    let data = CoffeeBar(name: subJson["name"].stringValue, city: subJson["city"].stringValue, address: subJson["address"].stringValue, wifi: subJson["wifi"].doubleValue, seat: subJson["seat"].doubleValue, quiet: subJson["quiet"].doubleValue, cheap: subJson["cheap"].doubleValue, tasty: subJson["tasty"].doubleValue, music: subJson["music"].doubleValue, latitude: subJson["latitude"].stringValue, longitude: subJson["longitude"].stringValue, url: subJson["url"].stringValue, like: false)
-                    self.coffeeBars.append(data)
+                    //let data = CoffeeBar(name: subJson["name"].stringValue, city: subJson["city"].stringValue, address: subJson["address"].stringValue, wifi: subJson["wifi"].doubleValue, seat: subJson["seat"].doubleValue, quiet: subJson["quiet"].doubleValue, cheap: subJson["cheap"].doubleValue, tasty: subJson["tasty"].doubleValue, music: subJson["music"].doubleValue, latitude: subJson["latitude"].stringValue, longitude: subJson["longitude"].stringValue, url: subJson["url"].stringValue, like: false)
+                    //self.coffeeBars.append(data)
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -193,9 +219,64 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
 
     }
         
-}
+    }
+    */
     
+    func fetchDataFromCoreData(){
+        
+        
+        // 從資料儲存區中讀取資料
+        let fetchRequest: NSFetchRequest<CoffeebarModel> = CoffeebarModel.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                if let fetchObjects = fetchResultController.fetchedObjects {
+                    coffeeBars = fetchObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
     
+    //準備處理內容變更時會呼叫
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type{
+        case .insert:
+            if let newIndexPath = newIndexPath{
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath{
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath{
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+        if let fetchObjects = controller.fetchedObjects{
+            coffeeBars = fetchObjects as! [CoffeebarModel]
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
     
     func popAlert(withTitle title:String){
         let alertController = UIAlertController(title: title, message: "請稍候再試", preferredStyle: .alert)
@@ -210,7 +291,7 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
             let name = CoffeeBar.name
             let city = CoffeeBar.city
             let address = CoffeeBar.address
-            let isMatch = name.localizedCaseInsensitiveContains(searchText) || city.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText)
+            let isMatch = name!.localizedCaseInsensitiveContains(searchText) || city!.localizedCaseInsensitiveContains(searchText) || address!.localizedCaseInsensitiveContains(searchText)
                 
             return isMatch
             
@@ -219,6 +300,7 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
         )
     }
     
+    //設定搜尋列
     func searchBarSetting(){
         searchController = UISearchController(searchResultsController: nil)
         tableView.tableHeaderView = searchController.searchBar
@@ -226,7 +308,7 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         
-        searchController.searchBar.placeholder = "輸入店家名稱,城市..."
+        searchController.searchBar.placeholder = "輸入店家名稱,城市,地址..."
         searchController.searchBar.barTintColor = .white
         searchController.searchBar.backgroundImage = UIImage()
         searchController.searchBar.tintColor = UIColor.red
@@ -254,5 +336,6 @@ class CoffeeBarTableViewController: UITableViewController,UISearchResultsUpdatin
         }
         
     }
+    
 
 }

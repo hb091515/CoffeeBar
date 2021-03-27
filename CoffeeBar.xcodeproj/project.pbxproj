@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4834E8622601D6C5001D745A /* NewCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834E8612601D6C5001D745A /* NewCommentTableViewController.swift */; };
+		4834E8662601D9B2001D745A /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834E8652601D9B2001D745A /* RoundedTextField.swift */; };
 		48386D2025F912BD0070736B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D1F25F912BD0070736B /* ProfileViewController.swift */; };
-		48386D2325F9284F0070736B /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D2225F9284F0070736B /* ProfileTableViewController.swift */; };
-		48386D3525F9C82C0070736B /* MyFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */; };
-		48386D3825F9F3E50070736B /* MyFavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */; };
+		48386D2325F9284F0070736B /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D2225F9284F0070736B /* FavoriteTableViewController.swift */; };
+		48386D3525F9C82C0070736B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3425F9C82C0070736B /* CommentViewController.swift */; };
+		48386D3825F9F3E50070736B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48386D3725F9F3E50070736B /* CommentTableViewCell.swift */; };
 		4839156425F5C1DF00C67395 /* CoffeeBarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */; };
 		4839156825F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */; };
 		4839156B25F5EBB500C67395 /* CoffeeBarInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */; };
@@ -28,16 +30,21 @@
 		48A9CB9425F7BA010025D1C3 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9CB9325F7BA010025D1C3 /* DesignableView.swift */; };
 		48BD334225FB5A150074DECD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48BD334125FB5A150074DECD /* GoogleService-Info.plist */; };
 		48BD334725FB8DBA0074DECD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BD334625FB8DBA0074DECD /* CloudKit.framework */; };
-		48E9D58B25F7CA2A006FDA06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */; };
+		48BDDBF6260B03C300AAA84E /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BDDBF5260B03C300AAA84E /* FavoriteTableViewCell.swift */; };
+		48BDDBFD260B7B1F00AAA84E /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BDDBFC260B7B1F00AAA84E /* CityTableViewController.swift */; };
+		48BDDC00260B7B3D00AAA84E /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BDDBFF260B7B3D00AAA84E /* CityTableViewCell.swift */; };
+		48BDDC04260B904A00AAA84E /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BDDC03260B904A00AAA84E /* UINavigationController.swift */; };
 		D5763A2C2A49D07B1B34BAAD /* Pods_CoffeeBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3FE87F0E0EAC0768CC2BFB2E /* Pods-CoffeeBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.release.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.release.xcconfig"; sourceTree = "<group>"; };
+		4834E8612601D6C5001D745A /* NewCommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCommentTableViewController.swift; sourceTree = "<group>"; };
+		4834E8652601D9B2001D745A /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		48386D1F25F912BD0070736B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		48386D2225F9284F0070736B /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
-		48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteViewController.swift; sourceTree = "<group>"; };
-		48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		48386D2225F9284F0070736B /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
+		48386D3425F9C82C0070736B /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		48386D3725F9F3E50070736B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailViewController.swift; sourceTree = "<group>"; };
 		4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarDetailHeaderView.swift; sourceTree = "<group>"; };
 		4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBarInfoCell.swift; sourceTree = "<group>"; };
@@ -58,7 +65,10 @@
 		48BD334125FB5A150074DECD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		48BD334425FB8DA70074DECD /* CoffeeBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeBar.entitlements; sourceTree = "<group>"; };
 		48BD334625FB8DBA0074DECD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		48BDDBF5260B03C300AAA84E /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		48BDDBFC260B7B1F00AAA84E /* CityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
+		48BDDBFF260B7B3D00AAA84E /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		48BDDC03260B904A00AAA84E /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		DB42BFBE209A678AEAE300A9 /* Pods_CoffeeBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeeBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF5C591443B7DD37B0A24F4 /* Pods-CoffeeBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeBar.debug.xcconfig"; path = "Target Support Files/Pods-CoffeeBar/Pods-CoffeeBar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,10 +92,11 @@
 				48909DA725F2088A00424B5B /* ViewController.swift */,
 				48909DBB25F219B800424B5B /* CoffeeBarTableViewController.swift */,
 				4839156325F5C1DF00C67395 /* CoffeeBarDetailViewController.swift */,
-				48E9D58A25F7CA2A006FDA06 /* LoginViewController.swift */,
 				48386D1F25F912BD0070736B /* ProfileViewController.swift */,
-				48386D2225F9284F0070736B /* ProfileTableViewController.swift */,
-				48386D3425F9C82C0070736B /* MyFavoriteViewController.swift */,
+				48386D2225F9284F0070736B /* FavoriteTableViewController.swift */,
+				48386D3425F9C82C0070736B /* CommentViewController.swift */,
+				4834E8612601D6C5001D745A /* NewCommentTableViewController.swift */,
+				48BDDBFC260B7B1F00AAA84E /* CityTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -105,7 +116,10 @@
 				4839156725F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift */,
 				4839156A25F5EBB500C67395 /* CoffeeBarInfoCell.swift */,
 				48A9CB9325F7BA010025D1C3 /* DesignableView.swift */,
-				48386D3725F9F3E50070736B /* MyFavoriteTableViewCell.swift */,
+				48386D3725F9F3E50070736B /* CommentTableViewCell.swift */,
+				4834E8652601D9B2001D745A /* RoundedTextField.swift */,
+				48BDDBF5260B03C300AAA84E /* FavoriteTableViewCell.swift */,
+				48BDDBFF260B7B3D00AAA84E /* CityTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,6 +145,7 @@
 		48909DA225F2088A00424B5B /* CoffeeBar */ = {
 			isa = PBXGroup;
 			children = (
+				48BDDC02260B902A00AAA84E /* Extensions */,
 				48BD334425FB8DA70074DECD /* CoffeeBar.entitlements */,
 				48A9CB8E25F76FD80025D1C3 /* Font */,
 				4839156225F5C1B100C67395 /* View */,
@@ -154,6 +169,14 @@
 				48A9CB8F25F76FF30025D1C3 /* crayon_1-1.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		48BDDC02260B902A00AAA84E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				48BDDC03260B904A00AAA84E /* UINavigationController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		6C7B6212072C5B85F6E4FB4C /* Pods */ = {
@@ -290,22 +313,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48386D3825F9F3E50070736B /* MyFavoriteTableViewCell.swift in Sources */,
-				48386D2325F9284F0070736B /* ProfileTableViewController.swift in Sources */,
+				48386D3825F9F3E50070736B /* CommentTableViewCell.swift in Sources */,
+				48386D2325F9284F0070736B /* FavoriteTableViewController.swift in Sources */,
+				48BDDBFD260B7B1F00AAA84E /* CityTableViewController.swift in Sources */,
 				4839156B25F5EBB500C67395 /* CoffeeBarInfoCell.swift in Sources */,
 				48909DA825F2088A00424B5B /* ViewController.swift in Sources */,
 				48909DBC25F219B900424B5B /* CoffeeBarTableViewController.swift in Sources */,
+				4834E8622601D6C5001D745A /* NewCommentTableViewController.swift in Sources */,
 				4839156425F5C1DF00C67395 /* CoffeeBarDetailViewController.swift in Sources */,
 				48909DA425F2088A00424B5B /* AppDelegate.swift in Sources */,
+				48BDDC00260B7B3D00AAA84E /* CityTableViewCell.swift in Sources */,
+				48BDDBF6260B03C300AAA84E /* FavoriteTableViewCell.swift in Sources */,
 				48A720A125FA7C8A00DC927B /* CoffeeBar.swift in Sources */,
 				48909DCB25F2291700424B5B /* CoffeeBarTableViewCell.swift in Sources */,
 				48909DA625F2088A00424B5B /* SceneDelegate.swift in Sources */,
 				4839156825F5CB4800C67395 /* CoffeeBarDetailHeaderView.swift in Sources */,
+				48BDDC04260B904A00AAA84E /* UINavigationController.swift in Sources */,
 				48A9CB9425F7BA010025D1C3 /* DesignableView.swift in Sources */,
-				48386D3525F9C82C0070736B /* MyFavoriteViewController.swift in Sources */,
+				48386D3525F9C82C0070736B /* CommentViewController.swift in Sources */,
 				48386D2025F912BD0070736B /* ProfileViewController.swift in Sources */,
 				48909DAE25F2088A00424B5B /* CoffeeBar.xcdatamodeld in Sources */,
-				48E9D58B25F7CA2A006FDA06 /* LoginViewController.swift in Sources */,
+				4834E8662601D9B2001D745A /* RoundedTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X6S462S4Q;
 				INFOPLIST_FILE = CoffeeBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -478,6 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X6S462S4Q;
 				INFOPLIST_FILE = CoffeeBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
